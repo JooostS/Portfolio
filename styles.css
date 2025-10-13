@@ -180,6 +180,12 @@ nav {
     background-clip: text;
 }
 
+.hero h1 {
+    min-height: 1.2em;          /* keep overall height */
+    line-height: 1.2;           /* consistent line-box */
+    vertical-align: baseline;   /* baseline stays put */
+}
+
 .hero p {
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     color: var(--text-secondary);
@@ -242,14 +248,15 @@ h2 {
     text-align: center;
 }
 
-/* Projects Grid */
-.projects-grid {
+
+/* repos Grid */
+.repos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
-.project-card {
+.repos-card {
     background: var(--bg-secondary);
     border-radius: 12px;
     overflow: hidden;
@@ -257,11 +264,11 @@ h2 {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.project-card:hover {
+.repos-card:hover {
     transform: translateY(-8px);
 }
 
-.project-image {
+.repos-image {
     width: 100%;
     height: 200px;
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
@@ -272,16 +279,16 @@ h2 {
     color: var(--accent);
 }
 
-.project-content {
+.repos-content {
     padding: 1.5rem;
 }
 
-.project-content h3 {
+.repos-content h3 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
 }
 
-.project-content p {
+.repos-content p {
     color: var(--text-secondary);
     margin-bottom: 1rem;
 }
@@ -552,7 +559,7 @@ body.light-mode {
 }
 
 /* cards lift a little in light mode */
-body:not(.dark-mode) .project-card,
+body:not(.dark-mode) .repos-card,
 body:not(.dark-mode) .skill-category {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -588,3 +595,45 @@ body.light-mode .meteor {
   display: none !important;
   opacity: 0 !important;
 }
+
+
+.btn {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+  transition: all 0.3s ease;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+  opacity: 0.5;
+  filter: blur(8px);
+  z-index: -1;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.btn:hover::before {
+  opacity: 1;
+  filter: blur(12px);
+}
+
+.btn-primary {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
