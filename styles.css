@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 :root {
@@ -840,6 +841,7 @@ body.light-mode .theme-switch .slider {
   transform: translateX(32px);
   background: var(--accent);
 }
+
 
 
 
