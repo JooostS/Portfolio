@@ -61,7 +61,7 @@ function createMeteor() {
 setInterval(createMeteor, 1000);
 
 // TYPE-WRITER H1 -----------------------------------------------------------
-const txts = ["JooostS", "Full-Stack Tinkerer", "Open-Source Fan"];
+const txts = ["JooostS", "Full-Stack Tinker", "Open-Source Fan"];
 let ti = 0, ci = 0, fwd = true, speed = 80;
 const h1 = document.querySelector(".hero h1");
 
@@ -90,24 +90,67 @@ addEventListener('click', e=>{
   }
 });
 
+// REPOS FUNCTION
 async function loadRepos() {
   const username = "JooostS";
   const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=3`);
   const repos = await response.json();
   const container = document.getElementById("repos");
 
-  container.innerHTML = repos.map(repo => `
-    <div class="repos-card">
-      <div class="repos-image">📦</div>
-      <div class="repos-content">
-        <h3>${repo.name}</h3>
-        <p>${repo.description || "No description available"}</p>
-        <p><strong>Latest update:</strong> ${new Date(repo.updated_at).toLocaleDateString()}</p>
-        <a href="${repo.html_url}" target="_blank" class="btn btn-secondary">Check on GitHub</a>
+    container.innerHTML = repos.map(repo => {
+    const imageUrl = `https://raw.githubusercontent.com/${username}/${repo.name}/main/preview.png`;
+
+    return `
+      <div class="repos-card">
+        <div class="repos-image">
+          <img src="${imageUrl}" alt="${repo.name} preview" onerror="this.style.display='none'">
+        </div>
+        <div class="repos-content">
+          <h3>${repo.name}</h3>
+          <p>${repo.description || "No description available"}</p>
+          <p><strong>Latest update:</strong> ${new Date(repo.updated_at).toLocaleDateString()}</p>
+          <a href="${repo.html_url}" target="_blank" class="btn btn-primary">View Project</a>
+        </div>
       </div>
-    </div>
-  `).join("");
+    `;
+  }).join("");
+
 }
+
 loadRepos();
 
+
+// Konami Code: ↑ ↑ ↓ ↓ ← → ← → B A
+const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === konamiSequence[konamiIndex]) {
+    konamiIndex++;
+    if (konamiIndex === konamiSequence.length) {
+      konamiIndex = 0;
+      activateStars();
+    }
+  } else {
+    konamiIndex = 0;
+  }
+});
+
+function activateStars() {
+  for (let i = 0; i < 750; i++) {
+    const star = document.createElement('div');
+    star.className = 'konami-star';
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.top = '-60px';
+    document.body.appendChild(star);
+
+    star.animate([
+      { transform: 'translateY(0)', opacity: 2 },
+      { transform: `translateY(${window.innerHeight}px)`, opacity: 0 }
+    ], {
+      duration: 2500 + Math.random() * 2000,
+      easing: 'ease-in'
+    }).onfinish = () => star.remove();
+  }
+}
 
