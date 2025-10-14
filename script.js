@@ -6,6 +6,7 @@ mobileMenu.onclick = () => {
   navLinks.classList.toggle('active');
 };
 
+
 // Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.onclick = e => {
@@ -153,4 +154,5 @@ function activateStars() {
     }).onfinish = () => star.remove();
   }
 }
+
 
