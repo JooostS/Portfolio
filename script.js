@@ -62,7 +62,7 @@ function createMeteor() {
 setInterval(createMeteor, 1000);
 
 // TYPE-WRITER H1 -----------------------------------------------------------
-const txts = ["JooostS", "Full-Stack Tinker", "Open-Source Fan"];
+const txts = ["JooostS", "Full-Stack Thinker", "Open-Source Fan"];
 let ti = 0, ci = 0, fwd = true, speed = 80;
 const h1 = document.querySelector(".hero h1");
 
